@@ -1,14 +1,41 @@
 import './App.css';
+import Boton from './componentes/Boton';
+import Contador from './componentes/Contador';
 import onepieceLogo from './imagenes/onepiece-logo.png';
+import { useState } from 'react'; 
+
 function App() {
+  
+  const [numClics, setNumClics] = useState(0);
+
+  const manejarClic = () => {
+    setNumClics(numClics + 1);
+  }
+
+  const reiniciarContador = () => {
+    setNumClics(0);
+  }
+  
+  
   return (
     <div className= 'App'>
      <div className='onepiece-logo-contenedor'>
       <img 
       className='onepiece-logo'
-      scr={onepieceLogo}
+      src={onepieceLogo}
       alt='Logo de onepiece' />
      </div>
+     <div className='contenedor-principal'>
+        <Contador numClics={numClics} />
+        <Boton 
+          texto='Clic'
+          esBotonDeClic={true}
+          manejarClic={manejarClic} />
+        <Boton 
+          texto='Reiniciar'
+          esBotonDeClic={false}
+          manejarClic={reiniciarContador} />
+      </div>
     </div>
   );
 }
